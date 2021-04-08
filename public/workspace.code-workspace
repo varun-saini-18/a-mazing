@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "C:\\Brainsaas\\Postgres_auth"
+		},
+		{
+			"path": "..\\..\\..\\Expensify-app"
+		},
+		{
+			"path": "..\\.."
+		},
+		{
+			"path": "c:\\Users\\Asus\\Downloads\\Pathfinding-Visualizer-Tutorial-master\\Pathfinding-Visualizer-Tutorial-master"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Postgres_auth"
+	}
+}

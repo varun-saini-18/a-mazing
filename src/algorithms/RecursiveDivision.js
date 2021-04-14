@@ -37,7 +37,6 @@ export function recursiveDivision(row_begin, row_end, col_begin, col_end) {
             if (i !== col_index)
                 ans.push([row_index, i]);
         }
-        console.log(row_index, col_index);
         recursiveDivision(row_begin, row_index - 1, col_begin, col_end);
         recursiveDivision(row_index + 1, row_end, col_begin, col_end);
     }
@@ -46,7 +45,6 @@ export function recursiveDivision(row_begin, row_end, col_begin, col_end) {
         var col_index = col_begin + Math.floor(Math.random() * num) * 2 + 1;
         var num2 = (row_end - row_begin) / 2 + 1;
         var row_index = row_begin + Math.floor(Math.random() * num2) * 2;
-        console.log(col_index, row_index)
         for (var i = row_begin; i <= row_end; i++) {
             if (i !== row_index)
                 ans.push([i, col_index]);

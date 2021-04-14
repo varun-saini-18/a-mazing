@@ -1,7 +1,7 @@
 .node {
   width: 25px;
   height: 25px;
-  outline: 0.5px solid PaleTurquoise;
+  outline: 0.5px solid rgb(230, 153, 150);
   display: inline-block;
 }
 
@@ -22,10 +22,10 @@
 
 
 @keyframes visitedAnimation-finish {
-  0%   {background-color: RoyalBlue;}
-  25%  {background-color: Khaki;}
-  50%  {background-color: Salmon;}
-  100% {background-color: Salmon;}
+  0%   {background-color: rgb(178, 178, 179);}
+  25%  {background-color: rgb(139, 139, 139);}
+  50%  {background-color: rgb(75, 74, 74);}
+  100% {background-color: rgb(15, 15, 15);}
 }
 
 
@@ -62,14 +62,14 @@
 }
 
 @keyframes visitedAnimation-wall {
-  0%   {background-color: red;}
-  25%  {background-color: Khaki;}
-  50%  {background-color: DodgerBlue;}
-  100% {background-color: DarkSlateGrey;}
+  0%   {background-color: rgb(160, 155, 155);}
+  25%  {background-color: rgb(117, 117, 117);}
+  50%  {background-color: rgb(66, 66, 66);}
+  100% {background-color: rgb(0, 0, 0);}
 }
 
 .node-game-wall {
-  background-color: Aquamarine;
+  background-color: rgb(69, 105, 224);
 }
 
 .node-visited {
@@ -86,22 +86,22 @@
 @keyframes visitedAnimation {
   0% {
     transform: scale(0.3);
-    background-color: rgba(0, 0, 66, 0.75);
+    background-color: rgba(236, 212, 238, 0.75);
     border-radius: 100%;
   }
 
   50% {
-    background-color: rgba(17, 104, 217, 0.75);
+    background-color: rgb(195, 223, 231);
   }
 
   75% {
     transform: scale(1.2);
-    background-color: rgba(0, 217, 159, 0.75);
+    background-color: rgba(238, 106, 194, 0.75);
   }
 
   100% {
     transform: scale(1);
-    background-color:  #40E0D0;
+    background-color:  rgb(238, 229, 109);
   }
 }
 
@@ -119,17 +119,17 @@
 @keyframes shortestPath {
   0% {
     transform: scale(0.6);
-    background-color: rgb(255, 254, 106);
+    background-color: rgb(187, 241, 177);
   }
 
   50% {
     transform: scale(1.2);
-    background-color: rgb(255, 254, 106);
+    background-color: rgb(188, 241, 143);
   }
 
   100% {
     transform: scale(1);
-    background-color: Khaki;
+    background-color: rgb(1, 105, 105);
     outline: 0px;
   }
 }

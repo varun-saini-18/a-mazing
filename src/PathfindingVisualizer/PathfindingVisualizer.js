@@ -6,7 +6,7 @@ import { getMaze } from '../algorithms/getMaze';
 import { recursiveDivision, generate_arr } from '../algorithms/RecursiveDivision';
 import { func, huntAndKill } from '../algorithms/huntAndKill';
 import { binaryTree } from '../algorithms/binaryTree';
-
+import { game } from '../algorithms/game';
 import './PathfindingVisualizer.css';
 
 
@@ -115,12 +115,15 @@ export default class PathfindingVisualizer extends Component {
       speed: 5,
       START_NODE_ROW: 0,
       START_NODE_COL: 0,
+      timer:60,
       FINISH_NODE_ROW: 20,
       FINISH_NODE_COL: 49,
       generating_algo: "Random Dfs",
-      generating_algo_content: random_dfs_content,
+      generating_algo_content: hunt_and_kill_content,
       solving_algo: "Djikstra",
-      solving_algo_content: djikstra_content
+      solving_algo_content: djikstra_content,
+      gameWallsCount: 0,
+      game_score:0
     };
   }
 
@@ -154,7 +157,9 @@ export default class PathfindingVisualizer extends Component {
       if (node.isWall) return;
       var newGameWallsCount;
       if (node.isGameWall)
+      {
         newGameWallsCount = this.state.gameWallsCount - 1;
+      }
       else
         newGameWallsCount = this.state.gameWallsCount + 1;
       const newGrid = getNewGridWithWallToggledGame(this.state.grid, row, col);
@@ -464,17 +469,51 @@ export default class PathfindingVisualizer extends Component {
     }
     this.setState({ solving_algo: solving_algo, solving_algo_content: content });
   }
+  
+  start_game() {
+    document.getElementById("generate_maze").disabled = true;
+    document.getElementById("generate_maze").className = "button-disabled";
 
+    document.getElementById("solve_maze").disabled = true;
+    document.getElementById("solve_maze").className = "button-disabled";
+    document.getElementById("start_game").className = "button-disabled";
+    document.getElementById("start_game").disabled = true;
+    document.getElementById("clearBoardBtn").disabled = true;
+    document.getElementById("clearBoardBtn").className = "button-disabled";
+    
+    is_game_on=true
+    this.generate_maze()
+    for (let i = 60; i >=0; i--) {
+      setTimeout(() => {
+        this.setState({ timer: i });
+        if(i==0)
+        {
+          visualizing=true
+          const startNode = this.state.grid[this.state.START_NODE_ROW][this.state.START_NODE_COL];
+          const finishNode = this.state.grid[this.state.FINISH_NODE_ROW][this.state.FINISH_NODE_COL];
+          document.getElementById("solve_maze").disabled = false;
+          document.getElementById("solve_maze").className = "button";
+          if(game(this.state.grid,startNode,finishNode))
+          {
+            this.setState({ game_score: ': You Won.'});
+          }
+          else
+          {
+            this.setState({ game_score: ': You Lost' });
+          }
+        }
+      }, 60000-i*1000);
+    }
+  }
 
   render() {
     const { grid, mouseIsPressed } = this.state;
-    const gameBtn = is_game_on ? 'Stop Game' : 'Start Game';
     return (
       <div>
         <div className="navbar">
           <select onChange={() => this.changeGeneratingAlgo()} name="algos" id="change_generating_algo">
-            <option value="Random Dfs">Random Dfs</option>
-            <option value="Kruskals">Kruskals</option>
+            {/* <option value="Random Dfs">Random Dfs</option> */}
+            {/* <option value="Kruskals">Kruskals</option> */}
             <option value="Hunt And Kill">Hunt And Kill</option>
             <option value="Recursive Division">Recursive Division</option>
             <option value="Binary Tree">Binary Tree</option>
@@ -488,18 +527,30 @@ export default class PathfindingVisualizer extends Component {
           <button onClick={() => this.solve_maze()} id="solve_maze" className="button">
             Solve Maze
         </button>
+        <button onClick={() => this.start_game()} id="start_game" className="button">
+            Start Game
+        </button>
+        <button  id="game_walls_count" className="button">
+            {this.state.gameWallsCount}
+        </button>
+        <button id="game_score" className="button">
+            Your Score {this.state.game_score}
+        </button>
+        <button id="game_score" className="button">
+            Timer {this.state.timer}
+        </button>
           <button onClick={() => this.resetGrid()} id="clearBoardBtn" className="button">
             Clear Board
         </button>
         </div>
         <div className="w3-dropdown-hover">
-          <button className="w3-button w3-black">Want to know about maze genearting algorithm?</button>
+          <button className="w3-button w3-teal">Want to know about maze genearting algorithm?</button>
           <div className="w3-dropdown-content w3-bar-block w3-border">
             {this.state.generating_algo_content}
           </div>
         </div>
         <div className="w3-dropdown-hover">
-          <button className="w3-button w3-black">Want to know about maze solving algorithm?</button>
+          <button className="w3-button w3-teal">Want to know about maze solving algorithm?</button>
           <div className="w3-dropdown-content w3-bar-block w3-border">
             {this.state.solving_algo_content}
           </div>

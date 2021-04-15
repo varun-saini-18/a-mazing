@@ -118,7 +118,7 @@ export default class PathfindingVisualizer extends Component {
       timer:60,
       FINISH_NODE_ROW: 20,
       FINISH_NODE_COL: 49,
-      generating_algo: "Random Dfs",
+      generating_algo: "Hunt And Kill",
       generating_algo_content: hunt_and_kill_content,
       solving_algo: "Djikstra",
       solving_algo_content: djikstra_content,
